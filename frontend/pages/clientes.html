@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clientes - Sistema de Gestión</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/clientes.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="page-title">
+        <button class="back-btn" onclick="goBack()">
+          <i class="fas fa-arrow-left"></i>
+          <span>Volver</span>
+        </button>
+        <h1>
+          <i class="fas fa-users"></i>
+          Gestión de Clientes
+        </h1>
+      </div>
+      <div class="header-actions">
+        <button class="add-btn" onclick="openModal()">
+          <i class="fas fa-plus"></i>
+          <span>Nuevo Cliente</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Filters -->
+    <div class="filters-section">
+      <div class="filters-row">
+        <div class="filter-group">
+          <label for="searchInput">Buscar cliente</label>
+          <input type="text" id="searchInput" placeholder="Nombre o email...">
+        </div>
+        <div class="filter-group">
+          <label for="statusFilter">Estado</label>
+          <select id="statusFilter">
+            <option value="">Todos</option>
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <button class="filter-btn primary" onclick="applyFilters()">
+            <i class="fas fa-search"></i>
+            Filtrar
+          </button>
+          <button class="filter-btn secondary" onclick="clearFilters()">
+            <i class="fas fa-times"></i>
+            Limpiar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-section">
+      <div class="table-header">
+        <div class="table-title">Lista de Clientes</div>
+        <div class="table-info" id="tableInfo">Cargando...</div>
+      </div>
+      <div class="table-container">
+        <table id="clientesTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Direccion</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="clientesTableBody">
+            <tr>
+              <td colspan="7">
+                <div class="loading">
+                  <div class="spinner"></div>
+                  <p>Cargando clientes...</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Modal -->
+<div class="modal" id="clientModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalTitle">Nuevo Cliente</h2>
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+    </div>
+    <form id="clientForm">
+      <div class="modal-body">
+        <input type="hidden" id="clientId">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre *</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="text" id="telefono" name="telefono">
+          </div>
+          <div class="form-group">
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" name="direccion">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <select id="estado" name="estado">
+              <option value="activo">Activo</option>
+              <option value="inactivo">Inactivo</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="modal-btn btn-cancel" onclick="closeModal()">Cancelar</button>
+        <button type="submit" class="modal-btn btn-save">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+  <script src="../js/clientes.js"></script>
+</body>
+</html>

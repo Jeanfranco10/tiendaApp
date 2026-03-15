@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Sistema de Gestión de Tienda</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-store"></i>
+        <span>Gestión de Tienda</span>
+      </div>
+      <div class="user-menu">
+        <div class="user-info">
+          <i class="fas fa-user-circle"></i>
+          <span id="userName">Usuario</span>
+        </div>
+        <button class="logout-btn" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Salir</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+      <h1>¡Bienvenido al Sistema de Gestión!</h1>
+      <p>Administra tu tienda de manera eficiente con nuestras herramientas integradas</p>
+    </div>
+
+    <!-- Menu Grid -->
+    <div class="menu-grid">
+      <div class="menu-card productos-card" onclick="navigateTo('productos')">
+        <i class="fas fa-box menu-icon"></i>
+        <h3 class="menu-title">Productos</h3>
+        <p class="menu-description">Gestiona el inventario de productos, precios, stock y categorías</p>
+        <div class="menu-stats">
+          <span>Total productos</span>
+          <span class="stat-number" id="totalProductos">...</span>
+        </div>
+      </div>
+
+      <div class="menu-card categorias-card" onclick="navigateTo('categorias')">
+        <i class="fas fa-tags menu-icon"></i>
+        <h3 class="menu-title">Categorías</h3>
+        <p class="menu-description">Organiza productos en categorías para mejor gestión</p>
+        <div class="menu-stats">
+          <span>Total categorías</span>
+          <span class="stat-number" id="totalCategorias">...</span>
+        </div>
+      </div>
+
+      <div class="menu-card proveedores-card" onclick="navigateTo('proveedores')">
+        <i class="fas fa-truck menu-icon"></i>
+        <h3 class="menu-title">Proveedores</h3>
+        <p class="menu-description">Administra la información de tus proveedores</p>
+        <div class="menu-stats">
+          <span>Total proveedores</span>
+          <span class="stat-number" id="totalProveedores">...</span>
+        </div>
+      </div>
+
+      <div class="menu-card clientes-card" onclick="navigateTo('clientes')">
+        <i class="fas fa-users menu-icon"></i>
+        <h3 class="menu-title">Clientes</h3>
+        <p class="menu-description">Gestiona la base de datos de clientes</p>
+        <div class="menu-stats">
+          <span>Total clientes</span>
+          <span class="stat-number" id="totalClientes">...</span>
+        </div>
+      </div>
+
+      <div class="menu-card ventas-card" onclick="navigateTo('ventas')">
+        <i class="fas fa-chart-line menu-icon"></i>
+        <h3 class="menu-title">Ventas</h3>
+        <p class="menu-description">Registra y consulta las ventas realizadas</p>
+        <div class="menu-stats">
+          <span>Total ventas</span>
+          <span class="stat-number" id="totalVentas">...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats-section">
+      <h2 class="stats-title">
+        <i class="fas fa-chart-bar"></i>
+        Resumen General
+      </h2>
+      <div class="stats-grid" id="statsGrid">
+        <div class="loading">
+          <div class="spinner"></div>
+          <p>Cargando estadísticas...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

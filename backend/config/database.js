@@ -1,22 +1,23 @@
- require('dotenv').config();
+require('dotenv').config();
 
- const mysql = require('mysql2/promise');
+const mysql = require('mysql2/promise');
 
- // Configuración de la conexión a MySQL
 const dbConfig = {
-    host: process.env.DB_HOST || 3306,
+    host: process.env.DB_HOST,
+    port: parseInt(process.env.DB_PORT) || 3306,  // 👈 puerto separado
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
-    waitForConnections: true, //Indica que si no hay conexiones disponibles, el programa esperará.
-    connectionLimit: 10, //Establece un límite de 10 conexiones simultáneas. Esto es importante para que tu aplicación no sature la base de datos.
-    queueLimit: 0//Si las conexiones están ocupadas, no se encolarán más
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
+    ssl: {
+        rejectUnauthorized: false  // 👈 requerido por Aiven
+    }
 };
 
-// Crear el pool de conexiones
 const pool = mysql.createPool(dbConfig);
 
-// Función para probar la conexión
 const testConnection = async () => {
     try {
         const connection = await pool.getConnection();
@@ -29,7 +30,6 @@ const testConnection = async () => {
     }
 };
 
-// Función helper para ejecutar queries
 const executeQuery = async (query, params = []) => {
     try {
         const [results] = await pool.execute(query, params);
@@ -44,9 +44,4 @@ const getConnection = async () => {
     return await pool.getConnection();
 };
 
-module.exports = {
-    pool,
-    testConnection,
-    executeQuery,
-     getConnection
-};
+module.exports = { pool, testConnection, executeQuery, getConnection };

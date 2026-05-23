@@ -116,7 +116,8 @@ El frontend es estático. Simplemente abre rontend/index.html en tu navegador o
 
 | Usuario | Contraseña |
 |---------|-----------|
-| admin   | admin123  |
+| admin   | admin123  | 
+O crear por registro usuario para entrar como admin
 
 ---
 

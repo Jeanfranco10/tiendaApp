@@ -71,12 +71,12 @@ function renderTable() {
             <td><strong>${categoria.nombre}</strong></td>
             <td>${categoria.descripcion || ''}</td>
             <td>
-                <span class="status-badge ${categoria.estado === 'activo' ? 'status-active' : 'status-inactive'}">
+                <span class="status-badge ${categoria.estado === 'activo' ? 'activo' : 'inactivo'}">
                     ${categoria.estado === 'activo' ? 'Activo' : 'Inactivo'}
                 </span>
             </td>
             <td>
-                <div class="actions">
+                <div class="actions-group">
                     <button class="action-btn btn-view" onclick="viewCategory(${categoria.id})" title="Ver">
                         <i class="fas fa-eye"></i>
                     </button>

@@ -73,12 +73,12 @@ function renderTable() {
             <td>${cliente.telefono || ''}</td>
             <td>${cliente.direccion || ''}</td>
             <td>
-                <span class="status-badge ${cliente.estado === 'activo' ? 'status-active' : 'status-inactive'}">
+                <span class="status-badge ${cliente.estado === 'activo' ? 'activo' : 'inactivo'}">
                     ${cliente.estado === 'activo' ? 'Activo' : 'Inactivo'}
                 </span>
             </td>
             <td>
-                <div class="actions">
+                <div class="actions-group">
                     <button class="action-btn btn-view" onclick="viewClient(${cliente.id})" title="Ver">
                         <i class="fas fa-eye"></i>
                     </button>

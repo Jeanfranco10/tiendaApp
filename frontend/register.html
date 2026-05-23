@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestión de Tienda - Registro</title>
+  <!-- Font Awesome: librería de iconos -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Estilos propios (mismo diseño que el login) -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- TARJETA PRINCIPAL: dos columnas (ilustración + formulario) -->
+  <main class="login-card">
+
+    <!-- COLUMNA IZQUIERDA: Ilustración decorativa -->
+    <div class="illustration-section">
+      <div class="illustration-content">
+        <img
+          class="illustration-img"
+          src="https://lh3.googleusercontent.com/aida/ADBb0ujdWf4zIhcYDj7KXvdQmOiZazjP3wy6nqnJ2hxGInYcNhnyFkmIhGEHRaV1uC0JUSCM-Fje5eXN6rmTiITh5USVnz_tQ3HVBRBPTO9GyvltHcakyqBccI4Tz8shqBuhB-rgW_3x6eVsSHCI-cjfSdXk4fzXbvD_gL69ahgpio7wjEGdAgyJMNNFZKNhQQ3qAHVyDOfk86GcPK3E0pFG4WegBLWBmI-R17WTsg7K5_kSo0oHL8OBPnaRa5Y"
+          alt="Ilustración de tienda"
+        >
+        <div class="illustration-text">
+          <p class="illustration-title">Optimiza tu negocio.</p>
+          <p class="illustration-subtitle">
+            Administra inventario, ventas y haz crecer tu tienda.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUMNA DERECHA: Formulario de registro -->
+    <div class="form-section">
+
+      <!-- Encabezado -->
+      <div class="form-header">
+        <i class="fas fa-user-plus"></i>
+        <h1>Crear Cuenta</h1>
+        <p>Regístrate para administrar tu tienda</p>
+      </div>
+
+      <!-- Formulario de registro -->
+      <form id="registerForm">
+        <!-- Mensaje de error -->
+        <div class="error-message" id="errorMessage"></div>
+
+        <!-- CAMPO: Nombre completo -->
+        <div class="form-group">
+          <label for="nombre">Nombre Completo</label>
+          <div class="input-wrapper">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
+          </div>
+        </div>
+
+        <!-- CAMPO: Correo electrónico -->
+        <div class="form-group">
+          <label for="email">Correo Electrónico</label>
+          <div class="input-wrapper">
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required>
+          </div>
+        </div>
+
+        <!-- CAMPO: Usuario -->
+        <div class="form-group">
+          <label for="username">Usuario</label>
+          <div class="input-wrapper">
+            <i class="fas fa-user-tag input-icon"></i>
+            <input type="text" id="username" name="username" placeholder="Elige un usuario" required>
+          </div>
+        </div>
+
+        <!-- CAMPO: Contraseña -->
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <div class="input-wrapper">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="password" name="password" placeholder="Mínimo 6 caracteres" required>
+            <button type="button" class="toggle-password" onclick="togglePassword()" tabindex="-1">
+              <i class="fas fa-eye" id="toggleIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- CAMPO: Confirmar contraseña -->
+        <div class="form-group">
+          <label for="confirmPassword">Confirmar Contraseña</label>
+          <div class="input-wrapper">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repite la contraseña" required>
+            <button type="button" class="toggle-password" onclick="toggleConfirmPassword()" tabindex="-1">
+              <i class="fas fa-eye" id="toggleConfirmIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- BOTÓN: Crear Cuenta -->
+        <button type="submit" class="login-btn" id="registerBtn">
+          <span class="btn-text">Crear Cuenta</span>
+          <i class="fas fa-arrow-right"></i>
+          <div class="loading">
+            <div class="spinner"></div>
+            <span>Registrando...</span>
+          </div>
+        </button>
+
+        <!-- Link: volver al login -->
+        <div class="register-link">
+          <p>¿Ya tienes cuenta? <a href="index.html">Inicia sesión aquí</a></p>
+        </div>
+      </form>
+
+    </div>
+  </main>
+
+  <!-- Script para mostrar/ocultar contraseñas -->
+  <script>
+    function togglePassword() {
+      const input = document.getElementById('password');
+      const icon = document.getElementById('toggleIcon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+    function toggleConfirmPassword() {
+      const input = document.getElementById('confirmPassword');
+      const icon = document.getElementById('toggleConfirmIcon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+  </script>
+  <!-- Script principal con la lógica de registro -->
+  <script src="js/register.js"></script>
+</body>
+</html>

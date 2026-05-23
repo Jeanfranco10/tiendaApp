@@ -1,41 +1,51 @@
-// Configuración
-        const API_BASE_URL = 'http://localhost:3000/api';
+// =============================================
+// DASHBOARD.JS - Panel principal
+// =============================================
 
-        // Verificar autenticación al cargar la página
-        document.addEventListener('DOMContentLoaded', async () => {
-            const token = localStorage.getItem('token');
-            const user = JSON.parse(localStorage.getItem('user') || '{}');
+const API_BASE_URL = 'http://localhost:3000/api';
 
-            if (!token) {
-                window.location.href = 'index.html';
-                return;
-            }
+// Al cargar la página, verifica sesión y carga datos
+document.addEventListener('DOMContentLoaded', async () => {
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
 
-            // Verificar token válido
-            try {
-                const response = await fetch(`${API_BASE_URL}/auth/verify`, {
-                    headers: {
-                        'Authorization': token
-                    }
-                });
+    if (!token) {
+        window.location.href = 'index.html';
+        return;
+    }
 
-                if (!response.ok) {
-                    throw new Error('Token inválido');
-                }
-
-                // Mostrar nombre del usuario
-                document.getElementById('userName').textContent = user.nombre || user.username || 'Usuario';
-
-                // Cargar estadísticas
-                await loadStats();
-
-            } catch (error) {
-                console.error('Error verificando token:', error);
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
-                window.location.href = 'index.html';
+    try {
+        // Verificar que el token sea válido con el backend
+        const response = await fetch(`${API_BASE_URL}/auth/verify`, {
+            headers: {
+                'Authorization': token
             }
         });
+
+        if (!response.ok) {
+            throw new Error('Token inválido');
+        }
+
+        // Mostrar nombre del usuario en sidebar y topbar
+        const nombre = user.nombre || user.username || 'Usuario';
+        document.getElementById('userName').textContent = nombre;
+        document.getElementById('userNameTop').textContent = nombre;
+
+        // Mostrar email del usuario en sidebar
+        if (user.email) {
+            document.getElementById('userEmail').textContent = user.email;
+        }
+
+        // Cargar estadísticas desde el backend
+        await loadStats();
+
+    } catch (error) {
+        console.error('Error verificando token:', error);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = 'index.html';
+    }
+});
 
         // Función para hacer peticiones autenticadas
         async function fetchWithAuth(url, options = {}) {
@@ -130,7 +140,14 @@
 
         // Navegación a diferentes secciones
         function navigateTo(section) {
+            if (section === 'dashboard') return; // Ya estamos en dashboard
             window.location.href = `pages/${section}.html`;
+        }
+
+        // Toggle sidebar en móvil
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('show-mobile');
+            document.querySelector('.sidebar-overlay')?.classList.toggle('show');
         }
 
         // Logout

@@ -4,106 +4,217 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - Sistema de Gestión de Tienda</title>
+  <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Estilos del dashboard -->
   <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-content">
-      <div class="logo">
-        <i class="fas fa-store"></i>
-        <span>Gestión de Tienda</span>
-      </div>
-      <div class="user-menu">
-        <div class="user-info">
-          <i class="fas fa-user-circle"></i>
-          <span id="userName">Usuario</span>
+
+  <!-- Overlay para el sidebar en móvil -->
+  <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- LAYOUT PRINCIPAL: sidebar + contenido -->
+  <div class="dashboard-layout">
+
+    <!-- =============================================
+         SIDEBAR (solo escritorio)
+         ============================================= -->
+    <aside class="sidebar">
+      <!-- Info del usuario -->
+      <div class="sidebar-user">
+        <div class="sidebar-avatar">
+          <i class="fas fa-user"></i>
         </div>
-        <button class="logout-btn" id="logoutBtn">
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Salir</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Container -->
-  <div class="container">
-    <!-- Welcome Section -->
-    <div class="welcome-section">
-      <h1>¡Bienvenido al Sistema de Gestión!</h1>
-      <p>Administra tu tienda de manera eficiente con nuestras herramientas integradas</p>
-    </div>
-
-    <!-- Menu Grid -->
-    <div class="menu-grid">
-      <div class="menu-card productos-card" onclick="navigateTo('productos')">
-        <i class="fas fa-box menu-icon"></i>
-        <h3 class="menu-title">Productos</h3>
-        <p class="menu-description">Gestiona el inventario de productos, precios, stock y categorías</p>
-        <div class="menu-stats">
-          <span>Total productos</span>
-          <span class="stat-number" id="totalProductos">...</span>
+        <div class="sidebar-user-info">
+          <h2 id="userName">Usuario</h2>
+          <p id="userEmail"></p>
         </div>
       </div>
 
-      <div class="menu-card categorias-card" onclick="navigateTo('categorias')">
-        <i class="fas fa-tags menu-icon"></i>
-        <h3 class="menu-title">Categorías</h3>
-        <p class="menu-description">Organiza productos en categorías para mejor gestión</p>
-        <div class="menu-stats">
-          <span>Total categorías</span>
-          <span class="stat-number" id="totalCategorias">...</span>
+      <!-- Navegación -->
+      <nav class="sidebar-nav">
+        <a class="sidebar-link active" onclick="navigateTo('dashboard'); toggleSidebar()">
+          <i class="fas fa-th-large"></i> Dashboard
+        </a>
+        <a class="sidebar-link" onclick="navigateTo('productos')">
+          <i class="fas fa-box"></i> Productos
+        </a>
+        <a class="sidebar-link" onclick="navigateTo('categorias')">
+          <i class="fas fa-tags"></i> Categorías
+        </a>
+        <a class="sidebar-link" onclick="navigateTo('proveedores')">
+          <i class="fas fa-truck"></i> Proveedores
+        </a>
+        <a class="sidebar-link" onclick="navigateTo('clientes')">
+          <i class="fas fa-users"></i> Clientes
+        </a>
+        <a class="sidebar-link" onclick="navigateTo('ventas')">
+          <i class="fas fa-chart-line"></i> Ventas
+        </a>
+
+        <!-- Configuración al final -->
+        <a class="sidebar-link settings" href="#">
+          <i class="fas fa-cog"></i> Configuración
+        </a>
+      </nav>
+    </aside>
+
+    <!-- =============================================
+         ÁREA PRINCIPAL
+         ============================================= -->
+    <main class="main-area">
+
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="topbar-title">
+            <i class="fas fa-store"></i> RetailAdmin
+          </h1>
+        </div>
+        <div class="topbar-right">
+          <div class="topbar-user">
+            <i class="fas fa-user-circle" style="font-size:20px;color:#3d4947;"></i>
+            <span id="userNameTop">Admin User</span>
+          </div>
+          <button class="btn-logout" id="logoutBtn">
+            <i class="fas fa-sign-out-alt" style="font-size:12px;"></i> Salir
+          </button>
+        </div>
+      </header>
+
+      <!-- CONTENIDO SCROLLABLE -->
+      <div class="content-area">
+        <div class="content-inner">
+
+          <!-- WELCOME BANNER -->
+          <section class="welcome-banner">
+            <h1>¡Bienvenido al Sistema de Gestión!</h1>
+            <p>Administra tu tienda de manera eficiente con nuestras herramientas integradas</p>
+          </section>
+
+          <!-- CARDS GRID -->
+          <section class="cards-grid">
+
+            <!-- Productos -->
+            <div class="menu-card card-productos" onclick="navigateTo('productos')">
+              <div class="card-icon">
+                <i class="fas fa-box"></i>
+              </div>
+              <h3 class="card-title">Productos</h3>
+              <p class="card-desc">Gestiona el inventario de productos, precios, stock y categorías</p>
+              <div class="card-footer">
+                <span class="card-footer-label">Total Productos</span>
+                <span class="card-num" id="totalProductos">...</span>
+              </div>
+            </div>
+
+            <!-- Categorías -->
+            <div class="menu-card card-categorias" onclick="navigateTo('categorias')">
+              <div class="card-icon">
+                <i class="fas fa-tags"></i>
+              </div>
+              <h3 class="card-title">Categorías</h3>
+              <p class="card-desc">Organiza productos en categorías para mejor gestión</p>
+              <div class="card-footer">
+                <span class="card-footer-label">Total Categorías</span>
+                <span class="card-num" id="totalCategorias">...</span>
+              </div>
+            </div>
+
+            <!-- Proveedores -->
+            <div class="menu-card card-proveedores" onclick="navigateTo('proveedores')">
+              <div class="card-icon">
+                <i class="fas fa-truck"></i>
+              </div>
+              <h3 class="card-title">Proveedores</h3>
+              <p class="card-desc">Administra la información de tus proveedores</p>
+              <div class="card-footer">
+                <span class="card-footer-label">Total Proveedores</span>
+                <span class="card-num" id="totalProveedores">...</span>
+              </div>
+            </div>
+
+            <!-- Clientes -->
+            <div class="menu-card card-clientes" onclick="navigateTo('clientes')">
+              <div class="card-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3 class="card-title">Clientes</h3>
+              <p class="card-desc">Gestiona la base de datos de clientes</p>
+              <div class="card-footer">
+                <span class="card-footer-label">Total Clientes</span>
+                <span class="card-num" id="totalClientes">...</span>
+              </div>
+            </div>
+
+            <!-- Ventas -->
+            <div class="menu-card card-ventas" onclick="navigateTo('ventas')">
+              <div class="card-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h3 class="card-title">Ventas</h3>
+              <p class="card-desc">Registra y consulta las ventas realizadas</p>
+              <div class="card-footer">
+                <span class="card-footer-label">Total Ventas</span>
+                <span class="card-num" id="totalVentas">...</span>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- RESUMEN GENERAL -->
+          <section class="stats-section">
+            <h2 class="stats-title">
+              <i class="fas fa-chart-bar"></i>
+              Resumen General
+            </h2>
+            <div class="stats-grid" id="statsGrid">
+              <div class="loading">
+                <div class="spinner"></div>
+                <p>Cargando estadísticas...</p>
+              </div>
+            </div>
+          </section>
+
         </div>
       </div>
 
-      <div class="menu-card proveedores-card" onclick="navigateTo('proveedores')">
-        <i class="fas fa-truck menu-icon"></i>
-        <h3 class="menu-title">Proveedores</h3>
-        <p class="menu-description">Administra la información de tus proveedores</p>
-        <div class="menu-stats">
-          <span>Total proveedores</span>
-          <span class="stat-number" id="totalProveedores">...</span>
-        </div>
-      </div>
-
-      <div class="menu-card clientes-card" onclick="navigateTo('clientes')">
-        <i class="fas fa-users menu-icon"></i>
-        <h3 class="menu-title">Clientes</h3>
-        <p class="menu-description">Gestiona la base de datos de clientes</p>
-        <div class="menu-stats">
-          <span>Total clientes</span>
-          <span class="stat-number" id="totalClientes">...</span>
-        </div>
-      </div>
-
-      <div class="menu-card ventas-card" onclick="navigateTo('ventas')">
-        <i class="fas fa-chart-line menu-icon"></i>
-        <h3 class="menu-title">Ventas</h3>
-        <p class="menu-description">Registra y consulta las ventas realizadas</p>
-        <div class="menu-stats">
-          <span>Total ventas</span>
-          <span class="stat-number" id="totalVentas">...</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Stats Section -->
-    <div class="stats-section">
-      <h2 class="stats-title">
-        <i class="fas fa-chart-bar"></i>
-        Resumen General
-      </h2>
-      <div class="stats-grid" id="statsGrid">
-        <div class="loading">
-          <div class="spinner"></div>
-          <p>Cargando estadísticas...</p>
-        </div>
-      </div>
-    </div>
+    </main>
   </div>
 
+  <!-- =============================================
+       BOTTOM NAV (móvil)
+       ============================================= -->
+  <nav class="bottom-nav">
+    <a class="active-nav" onclick="navigateTo('dashboard')">
+      <i class="fas fa-th-large"></i>
+      <span>Dashboard</span>
+    </a>
+    <a onclick="navigateTo('productos')">
+      <i class="fas fa-box"></i>
+      <span>Productos</span>
+    </a>
+    <a onclick="navigateTo('categorias')">
+      <i class="fas fa-tags"></i>
+      <span>Categorías</span>
+    </a>
+    <a onclick="navigateTo('clientes')">
+      <i class="fas fa-users"></i>
+      <span>Clientes</span>
+    </a>
+    <a onclick="navigateTo('ventas')">
+      <i class="fas fa-chart-line"></i>
+      <span>Ventas</span>
+    </a>
+  </nav>
+
+  <!-- Script del dashboard -->
   <script src="js/dashboard.js"></script>
 </body>
 </html>

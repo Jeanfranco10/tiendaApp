@@ -95,8 +95,3 @@ if (localStorage.getItem('token')) {
     });
 }
 
-// Link de registro
-document.getElementById('registerLink').addEventListener('click', (e) => {
-    e.preventDefault();
-    window.location.href = 'register.html';
-});

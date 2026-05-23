@@ -4,46 +4,116 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistema de Gestión de Tienda - Login</title>
+  <!-- Font Awesome: librería de iconos -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Estilos propios -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="login-container">
-    <div class="login-header">
-      <i class="fas fa-store"></i>
-      <h1>Sistema de Gestión</h1>
-      <p>Ingresa para administrar tu tienda</p>
-    </div>
-    
-    <form class="login-form" id="loginForm">
-      <div class="error-message" id="errorMessage"></div>
-      
-      <div class="form-group">
-        <label for="username">Usuario</label>
-        <input type="text" id="username" name="username" required>
-        <i class="fas fa-user"></i>
-      </div>
-      
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" name="password" required>
-        <i class="fas fa-lock"></i>
-      </div>
-      
-      <button type="submit" class="login-btn" id="loginBtn">
-        <span class="btn-text">Iniciar Sesión</span>
-        <div class="loading">
-          <div class="spinner"></div>
-          <span>Ingresando...</span>
-        </div>
-      </button>
-      
-      <div class="register-link">
-        <p>¿No tienes cuenta? <a href="#" id="registerLink">Regístrate aquí</a></p>
-      </div>
-    </form>
-  </div>
 
+  <!-- TARJETA PRINCIPAL: dos columnas (ilustración + formulario) -->
+  <main class="login-card">
+
+    <!-- COLUMNA IZQUIERDA: Ilustración decorativa -->
+    <div class="illustration-section">
+      <div class="illustration-content">
+        <!-- Imagen de la tienda / ilustración -->
+        <img
+          class="illustration-img"
+          src="https://lh3.googleusercontent.com/aida/ADBb0ujdWf4zIhcYDj7KXvdQmOiZazjP3wy6nqnJ2hxGInYcNhnyFkmIhGEHRaV1uC0JUSCM-Fje5eXN6rmTiITh5USVnz_tQ3HVBRBPTO9GyvltHcakyqBccI4Tz8shqBuhB-rgW_3x6eVsSHCI-cjfSdXk4fzXbvD_gL69ahgpio7wjEGdAgyJMNNFZKNhQQ3qAHVyDOfk86GcPK3E0pFG4WegBLWBmI-R17WTsg7K5_kSo0oHL8OBPnaRa5Y"
+          alt="Ilustración de tienda"
+        >
+        <!-- Texto promocional debajo de la imagen -->
+        <div class="illustration-text">
+          <p class="illustration-title">Optimiza tu negocio.</p>
+          <p class="illustration-subtitle">
+            Administra inventario, ventas y haz crecer tu tienda.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUMNA DERECHA: Formulario de inicio de sesión -->
+    <div class="form-section">
+
+      <!-- Encabezado: ícono + título -->
+      <div class="form-header">
+        <i class="fas fa-store"></i>
+        <h1>Sistema de Gestión</h1>
+        <p>Ingresa para administrar tu tienda</p>
+      </div>
+
+      <!-- Formulario de login -->
+      <form class="login-form" id="loginForm">
+        <!-- Mensaje de error (oculto por defecto) -->
+        <div class="error-message" id="errorMessage"></div>
+
+        <!-- CAMPO: Usuario -->
+        <div class="form-group">
+          <label for="username">Usuario</label>
+          <div class="input-wrapper">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="username" name="username" placeholder="Tu usuario" required>
+          </div>
+        </div>
+
+        <!-- CAMPO: Contraseña -->
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <div class="input-wrapper">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="password" name="password" placeholder="••••••••" required>
+            <!-- Botón para mostrar/ocultar contraseña -->
+            <button type="button" class="toggle-password" onclick="togglePassword()" tabindex="-1">
+              <i class="fas fa-eye" id="toggleIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Link: Olvidé mi contraseña -->
+        <div class="forgot-password">
+          <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <!-- BOTÓN: Iniciar Sesión -->
+        <button type="submit" class="login-btn" id="loginBtn">
+          <span class="btn-text">Iniciar Sesión</span>
+          <i class="fas fa-arrow-right"></i>
+          <!-- Spinner de carga (se muestra mientras se procesa) -->
+          <div class="loading">
+            <div class="spinner"></div>
+            <span>Ingresando...</span>
+          </div>
+        </button>
+
+        <!-- Link: Ir a registro -->
+        <div class="register-link">
+          <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+        </div>
+      </form>
+
+    </div>
+  </main>
+
+  <!-- Script para mostrar/ocultar contraseña -->
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      const toggleIcon = document.getElementById('toggleIcon');
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+      }
+    }
+  </script>
+  <!-- Script principal con la lógica de login -->
   <script src="js/login.js"></script>
 </body>
 </html>

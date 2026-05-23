@@ -5,41 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Proveedores - Sistema de Gestión</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../css/proveedores.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/crud.css">
+  <style>
+    .card-icon { background: rgba(249,115,22,0.1); color: #f97316; }
+    .page-header-info h1 i { color: #f97316; }
+  </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-content">
-      <div class="page-title">
-        <button class="back-btn" onclick="goBack()">
-          <i class="fas fa-arrow-left"></i>
-          <span>Volver</span>
-        </button>
-        <h1>
-          <i class="fas fa-truck"></i>
-          Gestión de Proveedores
-        </h1>
-      </div>
-      <div class="header-actions">
-        <button class="add-btn" onclick="openModal()">
-          <i class="fas fa-plus"></i>
-          <span>Nuevo Proveedor</span>
-        </button>
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="page-header-left">
+      <button class="back-btn" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <div class="page-header-info">
+        <h1><i class="fas fa-truck"></i> Gestión de Proveedores</h1>
+        <p>Administra la información de tus proveedores.</p>
       </div>
     </div>
+    <button class="add-btn" onclick="openModal()">
+      <i class="fas fa-plus"></i> Nuevo Proveedor
+    </button>
   </header>
 
-  <!-- Main Container -->
-  <div class="container">
-    <!-- Filters -->
-    <div class="filters-section">
+  <!-- CONTENIDO -->
+  <div class="content">
+
+    <!-- FILTROS -->
+    <section class="filters-section">
       <div class="filters-row">
         <div class="filter-group">
-          <label for="searchInput">Buscar proveedor</label>
-          <input type="text" id="searchInput" placeholder="Nombre o empresa...">
+          <label for="searchInput">Buscar</label>
+          <div class="search-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Nombre o contacto...">
+          </div>
         </div>
-        <div class="filter-group">
+        <div class="filter-group" style="max-width:200px;">
           <label for="statusFilter">Estado</label>
           <select id="statusFilter">
             <option value="">Todos</option>
@@ -49,35 +53,33 @@
         </div>
         <div class="filter-actions">
           <button class="filter-btn primary" onclick="applyFilters()">
-            <i class="fas fa-search"></i>
-            Filtrar
+            <i class="fas fa-search"></i> Filtrar
           </button>
           <button class="filter-btn secondary" onclick="clearFilters()">
-            <i class="fas fa-times"></i>
-            Limpiar
+            <i class="fas fa-times"></i> Limpiar
           </button>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Table -->
-    <div class="table-section">
+    <!-- TABLA -->
+    <section class="table-section">
       <div class="table-header">
-        <div class="table-title">Lista de Proveedores</div>
-        <div class="table-info" id="tableInfo">Cargando...</div>
+        <span class="table-title">Lista de Proveedores</span>
+        <span class="table-info" id="tableInfo">Cargando...</span>
       </div>
       <div class="table-container">
-        <table id="proveedoresTable">
+        <table>
           <thead>
             <tr>
-              <th>ID</th>
+              <th style="width:60px;">ID</th>
               <th>Nombre</th>
               <th>Contacto</th>
               <th>Teléfono</th>
               <th>Email</th>
               <th>Dirección</th>
-              <th>Estado</th>
-              <th>Acciones</th>
+              <th style="width:120px;">Estado</th>
+              <th style="width:120px;" class="actions-col">Acciones</th>
             </tr>
           </thead>
           <tbody id="proveedoresTableBody">
@@ -92,46 +94,45 @@
           </tbody>
         </table>
       </div>
-    </div>
+    </section>
+
   </div>
 
-  <!-- Modal -->
+  <!-- MODAL -->
   <div class="modal" id="providerModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" id="modalTitle">Nuevo Proveedor</h2>
+        <h2 id="modalTitle">Nuevo Proveedor</h2>
         <button class="close-btn" onclick="closeModal()">&times;</button>
       </div>
       <form id="providerForm">
         <div class="modal-body">
           <input type="hidden" id="providerId">
-          
           <div class="form-row">
             <div class="form-group">
               <label for="nombre">Nombre *</label>
               <input type="text" id="nombre" name="nombre" required>
             </div>
             <div class="form-group">
-            <label for="contacto">Contacto *</label>
-            <input type="text" id="contacto" name="contacto" required>
+              <label for="contacto">Contacto *</label>
+              <input type="text" id="contacto" name="contacto" required>
+            </div>
           </div>
-          </div>
-
           <div class="form-row">
             <div class="form-group">
               <label for="telefono">Teléfono</label>
               <input type="text" id="telefono" name="telefono">
             </div>
-             <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email">
-          </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email">
+            </div>
           </div>
           <div class="form-row">
-          <div class="form-group">
-            <label for="direccion">Dirección</label>
-            <input type="text" id="direccion" name="direccion">
-          </div>
+            <div class="form-group">
+              <label for="direccion">Dirección</label>
+              <input type="text" id="direccion" name="direccion">
+            </div>
             <div class="form-group">
               <label for="estado">Estado</label>
               <select id="estado" name="estado">

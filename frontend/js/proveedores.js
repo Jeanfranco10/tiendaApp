@@ -75,12 +75,12 @@ function renderTable() {
             <td>${proveedor.email || ''}</td>
             <td>${proveedor.direccion || ''}</td>
             <td>
-                <span class="status-badge ${proveedor.estado === 'activo' ? 'status-active' : 'status-inactive'}">
+                <span class="status-badge ${proveedor.estado === 'activo' ? 'activo' : 'inactivo'}">
                     ${proveedor.estado === 'activo' ? 'Activo' : 'Inactivo'}
                 </span>
             </td>
             <td>
-                <div class="actions">
+                <div class="actions-group">
                     <button class="action-btn btn-view" onclick="viewProvider(${proveedor.id})" title="Ver">
                         <i class="fas fa-eye"></i>
                     </button>

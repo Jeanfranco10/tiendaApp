@@ -1,45 +1,49 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Categorías - Sistema de Gestión</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../css/categorias.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/crud.css">
+  <style>
+    .card-icon { background: rgba(14,165,233,0.1); color: #0ea5e9; }
+    .page-header-info h1 i { color: #0ea5e9; }
+  </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-content">
-      <div class="page-title">
-        <button class="back-btn" onclick="goBack()">
-          <i class="fas fa-arrow-left"></i>
-          <span>Volver</span>
-        </button>
-        <h1>
-          <i class="fas fa-tags"></i>
-          Gestión de Categorías
-        </h1>
-      </div>
-      <div class="header-actions">
-        <button class="add-btn" onclick="openModal()">
-          <i class="fas fa-plus"></i>
-          <span>Nueva Categoría</span>
-        </button>
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="page-header-left">
+      <button class="back-btn" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <div class="page-header-info">
+        <h1><i class="fas fa-tags"></i> Gestión de Categorías</h1>
+        <p>Administra las categorías de productos.</p>
       </div>
     </div>
+    <button class="add-btn" onclick="openModal()">
+      <i class="fas fa-plus"></i> Nueva Categoría
+    </button>
   </header>
 
-  <!-- Main Container -->
-  <div class="container">
-    <!-- Filters -->
-    <div class="filters-section">
+  <!-- CONTENIDO -->
+  <div class="content">
+
+    <!-- FILTROS -->
+    <section class="filters-section">
       <div class="filters-row">
         <div class="filter-group">
-          <label for="searchInput">Buscar categoría</label>
-          <input type="text" id="searchInput" placeholder="Nombre o descripción...">
+          <label for="searchInput">Buscar</label>
+          <div class="search-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Nombre o descripción...">
+          </div>
         </div>
-        <div class="filter-group">
+        <div class="filter-group" style="max-width:200px;">
           <label for="statusFilter">Estado</label>
           <select id="statusFilter">
             <option value="">Todos</option>
@@ -49,32 +53,30 @@
         </div>
         <div class="filter-actions">
           <button class="filter-btn primary" onclick="applyFilters()">
-            <i class="fas fa-search"></i>
-            Filtrar
+            <i class="fas fa-search"></i> Filtrar
           </button>
           <button class="filter-btn secondary" onclick="clearFilters()">
-            <i class="fas fa-times"></i>
-            Limpiar
+            <i class="fas fa-times"></i> Limpiar
           </button>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Table -->
-    <div class="table-section">
+    <!-- TABLA -->
+    <section class="table-section">
       <div class="table-header">
-        <div class="table-title">Lista de Categorías</div>
-        <div class="table-info" id="tableInfo">Cargando...</div>
+        <span class="table-title">Lista de Categorías</span>
+        <span class="table-info" id="tableInfo">Cargando...</span>
       </div>
       <div class="table-container">
-        <table id="categoriasTable">
+        <table>
           <thead>
             <tr>
-              <th>ID</th>
+              <th style="width:60px;">ID</th>
               <th>Categoría</th>
               <th>Descripción</th>
-              <th>Estado</th>
-              <th>Acciones</th>
+              <th style="width:120px;">Estado</th>
+              <th style="width:120px;" class="actions-col">Acciones</th>
             </tr>
           </thead>
           <tbody id="categoriasTableBody">
@@ -89,42 +91,34 @@
           </tbody>
         </table>
       </div>
-    </div>
+    </section>
+
   </div>
 
-  <!-- Modal -->
+  <!-- MODAL -->
   <div class="modal" id="categoryModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" id="modalTitle">Nueva Categoría</h2>
+        <h2 id="modalTitle">Nueva Categoría</h2>
         <button class="close-btn" onclick="closeModal()">&times;</button>
       </div>
       <form id="categoryForm">
         <div class="modal-body">
           <input type="hidden" id="categoryId">
-          
-          <div class="form-row">
-            <div class="form-group">
-              <label for="nombre">Nombre de la Categoría *</label>
-              <input type="text" id="nombre" name="nombre" required>
-            </div>
+          <div class="form-group">
+            <label for="nombre">Nombre de la Categoría *</label>
+            <input type="text" id="nombre" name="nombre" required>
           </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="descripcion">Descripción</label>
-              <textarea id="descripcion" name="descripcion" placeholder="Descripción de la categoría..."></textarea>
-            </div>
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion" placeholder="Descripción de la categoría..."></textarea>
           </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="estado">Estado</label>
-              <select id="estado" name="estado">
-                <option value="activo">Activo</option>
-                <option value="inactivo">Inactivo</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <select id="estado" name="estado">
+              <option value="activo">Activo</option>
+              <option value="inactivo">Inactivo</option>
+            </select>
           </div>
         </div>
         <div class="modal-footer">
@@ -134,6 +128,9 @@
       </form>
     </div>
   </div>
+
+  <!-- NOTIFICACIONES (creadas por JS) -->
+  <div id="notificationContainer"></div>
 
   <script src="../js/categorias.js"></script>
 </body>

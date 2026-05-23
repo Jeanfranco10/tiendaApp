@@ -135,24 +135,24 @@
                     <td>${producto.categoria_nombre || 'Sin categoría'}</td>
                     <td>$${parseFloat(producto.precio).toFixed(2)}</td>
                     <td>
-                        <span style="color: ${producto.stock < 10 ? '#dc3545' : '#28a745'}">
+                        <span class="${producto.stock < 10 ? 'stock-low' : 'stock-ok'}">
                             ${producto.stock}
                             ${producto.stock < 10 ? ' <i class="fas fa-exclamation-triangle"></i>' : ''}
                         </span>
                     </td>
                     <td>${producto.proveedor_nombre || 'Sin proveedor'}</td>
                     <td>
-                        <span class="status-badge ${producto.estado === 'activo' ? 'status-active' : 'status-inactive'}">
+                        <span class="status-badge ${producto.estado === 'activo' ? 'activo' : 'inactivo'}">
                             ${producto.estado === 'activo' ? 'Activo' : 'Inactivo'}
                         </span>
                     </td>
                     <td>
                         ${producto.imagen 
-                            ? `<img src="${producto.imagen}" alt="${producto.nombre}" style="width:50px;height:auto;border-radius:4px;">` 
-                            : 'Sin imagen'}
+                            ? `<img src="${producto.imagen}" alt="${producto.nombre}" class="img-thumb">` 
+                            : '<span style="color:#bcc9c6;">Sin imagen</span>'}
                     </td>
                     <td>
-                        <div class="actions">
+                        <div class="actions-group">
                             <button class="action-btn btn-view" onclick="viewProduct(${producto.id})" title="Ver">
                                 <i class="fas fa-eye"></i>
                             </button>

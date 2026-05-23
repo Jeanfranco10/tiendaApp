@@ -1,5 +1,5 @@
 // Configuración de la API
-const API_BASE_URL = 'https://tiendaapp-backend.onrender.com';
+const API_BASE_URL = 'https://tiendaapp-backend.onrender.com/api';
 
 // Elementos del DOM
 const loginForm = document.getElementById('loginForm');

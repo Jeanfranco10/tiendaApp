@@ -14,7 +14,7 @@ const login = async (req, res) => {
             });
         }
 
-        const query = 'SELECT * FROM usuarios WHERE username = ? AND estado = "activo"';
+        const query = "SELECT * FROM usuarios WHERE username = ? AND estado = 'activo'";
         const users = await executeQuery(query, [username]);
 
         if (users.length === 0) {

@@ -3,7 +3,7 @@
 // =============================================
 
 // URL base de la API del backend
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'https://tiendaapp-backend.onrender.com/api';
 
 // Variables globales: almacenan las ventas traídas del backend
 let ventas = [];          // Lista completa de ventas
